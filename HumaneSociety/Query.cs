@@ -221,13 +221,6 @@ namespace HumaneSociety
 
                 }
             }
-            
-
-
-
-
-
-
         }
         internal static void RemoveAnimal(Animal animal)
         {
@@ -235,12 +228,42 @@ namespace HumaneSociety
         }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) 
         {
-            throw new NotImplementedException();
+            //linq query to get list of all animals 
+            IQueryable<Animal> results = db.Animals;
+            foreach(KeyValuePair<int, string> stuff in updates)
+            {
+                switch (stuff.Key)
+                {
+                    case 1:
+                        results = results.Where(a => a.Category.Name == stuff.Value);
+                        break;
+                    case 2:
+                        results = results.Where(a => a.Name == stuff.Value);
+                        break;
+                    case 3:
+                        results = results.Where(a => a.Age == Convert.ToInt32(stuff.Value));
+                        break;
+                    case 4:
+                        results = results.Where(a => a.Demeanor == stuff.Value);
+                        break;
+                    case 5:
+                        results = results.Where(a => a.KidFriendly == Convert.ToBoolean(stuff.Value));
+                        break;
+                    case 6:
+                        results = results.Where(a => a.PetFriendly == Convert.ToBoolean(stuff.Value));
+                        break;
+                    case 7:
+                        results = results.Where(a => a.Weight == Convert.ToInt32(stuff.Value));
+                        break;
+                    default:
+                        break;
+                }
+            }            
+            return results;
         }
          
-        // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
             var catName = db.Categories.Where(c => c.Name == categoryName).Select(c => c.CategoryId).FirstOrDefault();
