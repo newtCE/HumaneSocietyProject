@@ -185,7 +185,7 @@ namespace HumaneSociety
         {            
          
         }
-
+        //this is a comment
         internal static void RemoveAnimal(Animal animal)
         {
             db.Animals.DeleteOnSubmit(animal);
