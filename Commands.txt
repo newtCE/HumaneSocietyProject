@@ -1,0 +1,46 @@
+INSERT INTO DietPlans VALUES ('LotsOfButter', 'Butter', 3);
+INSERT INTO DietPlans VALUES ('SomeButter', 'Butter', 1);
+INSERT INTO DietPlans VALUES ('NoButter', 'Butter', 0);
+INSERT INTO DietPlans VALUES ('AlmostVegan', 'Ham', 2);
+INSERT INTO DietPlans VALUES ('Level5Vegan', 'NoShadows', 2);
+
+INSERT INTO Categories VALUES ('Reptiles');
+INSERT INTO Categories VALUES ('Dogs');
+INSERT INTO Categories VALUES ('Cats');
+INSERT INTO Categories VALUES ('Rodents');
+INSERT INTO Categories VALUES ('Exotics');
+
+INSERT INTO Employees VALUES('Burt', 'Reynolds', 'MustacheKing', '123Password', 1, 'breynolds@gmail.com');
+INSERT INTO Employees VALUES('Bort', 'Reynolds', 'MustacheKing1', '123Password', 3, 'breynolds1@gmail.com');
+INSERT INTO Employees VALUES('Bart', 'Reynolds', 'MustacheKing2', '123Password', 4, 'breynolds2@gmail.com');
+INSERT INTO Employees VALUES('Bert', 'Reynolds', 'MustacheKing3', '123Password', 5, 'breynolds3@gmail.com');
+INSERT INTO Employees VALUES('Elijah', 'Wood', 'Frodo', '123Password', 2, 'frodo@gmail.com');
+
+INSERT INTO Animals VALUES('Gadnuk', 57, 2, 'Friendly Enough', 1, 0, 'Male', 'Available', 1, 2, 2);
+INSERT INTO Animals VALUES('Ragnar', 12, 5, 'Friendly', 1, 1, 'Male', 'Available', 3, 1, 4);
+INSERT INTO Animals VALUES('Gamymede', 30, 30, 'Chill', 0, 0, 'Male', 'Available', 5, 3, 3);
+INSERT INTO Animals VALUES('Puck',1,300,'Annoying',1,0,'male','Available',4,5,2);
+INSERT INTO Animals VALUES('Doofy',110,300,'Chill',1,0,'male','Available',1,1,1);
+
+INSERT INTO Addresses VALUES('123 Hamburger','Appetizer', 49, 53074);
+INSERT INTO Addresses VALUES('222 Main St','Germany', 11, 96718);
+INSERT INTO Addresses VALUES('323 Street St.','Lincoln', 16, 66104);
+INSERT INTO Addresses VALUES('400 Street Ave','Town of Numbers', 22, 48001); 
+INSERT INTO Addresses VALUES('1st Street','Oklahoma City', 36, 73103); 
+
+INSERT INTO Clients VALUES('Flunky','Hayes','ProBatter','123Password',1,'theBest@gmail.com');
+INSERT INTO Clients VALUES('Flanky','Hayes','ProCatcher','123Password',2,'theBester@gmail.com');
+INSERT INTO Clients VALUES('Blithe','Anklesocks','ladyPie','123Password',3,'gmail4ever@gmail.com');
+INSERT INTO Clients VALUES('Lump','Watkins','friendman','123Password',4,'dignifiedGuy@gmail.com');
+INSERT INTO Clients VALUES('Lamp','Brohamper','dudebro','124Password',5,'angryGuy@gmail.com');
+
+INSERT INTO Rooms VALUES(1, 1);
+INSERT INTO Rooms VALUES(2, 2);
+INSERT INTO Rooms VALUES(3, 3);
+INSERT INTO Rooms VALUES(4, 4);
+INSERT INTO Rooms VALUES(5, 5);
+INSERT INTO Rooms VALUES(6, null);
+INSERT INTO Rooms VALUES(7, null);
+INSERT INTO Rooms VALUES(8, null);
+INSERT INTO Rooms VALUES(9, null);
+INSERT INTO Rooms VALUES(10, null);
