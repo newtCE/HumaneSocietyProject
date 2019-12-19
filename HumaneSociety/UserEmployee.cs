@@ -246,6 +246,7 @@ namespace HumaneSociety
         {
             Console.Clear();
 
+            Console.WriteLine("Categories Available: Reptiles, Dogs, Cats, Rodents, Exotics");
             string animalCategoryName = UserInterface.GetStringData("category/breed", "the name of the animal's");
             string animalDietPlanName = UserInterface.GetStringData("diet plan", "the name of the animal's");
 
