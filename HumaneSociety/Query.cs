@@ -182,10 +182,53 @@ namespace HumaneSociety
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-         
+        {
+            Animal animal = new Animal();
+
+            for(int i = 0; i < updates.Count; i++)
+            {
+                if(updates[i] == null)
+                {
+                    //do nothing 
+                } else
+                {
+                    if(i == 1)
+                    {
+                        animal.Category.Name = updates[1];
+                    } else if(i == 2)
+                    {
+                        animal.Name = updates[2];
+                    } else if (i == 3)
+                    {
+                        animal.Age = Convert.ToInt32(updates[3]);
+                    }
+                    else if (i == 4)
+                    {
+                        animal.Demeanor = updates[4];
+                    }
+                    else if (i == 5)
+                    {
+                        animal.KidFriendly = Convert.ToBoolean(updates[5]);
+                    }
+                    else if (i == 6)
+                    {
+                        animal.PetFriendly = Convert.ToBoolean(updates[6]);
+                    }
+                    else if (i == 7)
+                    {
+                        animal.Weight = Convert.ToInt32(updates[7]);
+                    }
+
+                }
+            }
+            
+
+
+
+
+
+
         }
-        //this is a comment
         internal static void RemoveAnimal(Animal animal)
         {
             db.Animals.DeleteOnSubmit(animal);
