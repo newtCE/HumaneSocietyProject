@@ -166,7 +166,22 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+            switch (crudOperation)
+            {
+                case "update":
+                    UpdateEmployee(employee.EmployeeId);
+                    break;
+                case "read":
+                    GetEmployeeByID(employee.EmployeeId);
+                    break;
+                case "delete":
+                    RemoveEmployee(employee);
+                    break;
+                case "create":
+                    AddEmployee(employee);
+                    break;
+
+            }
         }
 
         internal static void AddEmployee(Employee employee)
@@ -181,8 +196,7 @@ namespace HumaneSociety
 
         internal static void UpdateEmployee(int id,Dictionary<int, string> updates)
         {
-            Animal animal = new Animal();
-
+            Employee employee = new Employee();
             for (int i = 0; i < updates.Count; i++)
             {
                 if (updates[i] == null)
@@ -193,38 +207,35 @@ namespace HumaneSociety
                 {
                     if (i == 1)
                     {
-                        animal.Category.Name = updates[1];
+                        employee.FirstName = updates[1];
                     }
                     else if (i == 2)
                     {
-                        animal.Name = updates[2];
+                        employee.LastName = updates[2];
                     }
                     else if (i == 3)
                     {
-                        animal.Age = Convert.ToInt32(updates[3]);
+                        employee.UserName=(updates[3]);
                     }
                     else if (i == 4)
                     {
-                        animal.Demeanor = updates[4];
+                        employee.Password = updates[4];
                     }
                     else if (i == 5)
                     {
-                        animal.KidFriendly = Convert.ToBoolean(updates[5]);
+                        employee.EmployeeNumber = Convert.ToInt32(updates[5]);
                     }
                     else if (i == 6)
                     {
-                        animal.PetFriendly = Convert.ToBoolean(updates[6]);
+                        employee.Email = (updates[6]);
                     }
-                    else if (i == 7)
-                    {
-                        animal.Weight = Convert.ToInt32(updates[7]);
-                    }
-
                 }
             }
-        
         }
-
+        internal static void RemoveEmployee(Employee employee)
+        {
+            db.Employees.DeleteOnSubmit(employee);
+        }
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
