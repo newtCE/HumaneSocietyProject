@@ -169,6 +169,62 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
+        internal static void AddEmployee(Employee employee)
+        {
+            db.Employees.InsertOnSubmit(employee);
+            db.SubmitChanges();
+        }
+        internal static Employee GetEmployeeByID(int id)
+        {
+            return db.Employees.Where(e => e.EmployeeId == id).FirstOrDefault();
+        }
+
+        internal static void UpdateEmployee(int id,Dictionary<int, string> updates)
+        {
+            Animal animal = new Animal();
+
+            for (int i = 0; i < updates.Count; i++)
+            {
+                if (updates[i] == null)
+                {
+                    //do nothing 
+                }
+                else
+                {
+                    if (i == 1)
+                    {
+                        animal.Category.Name = updates[1];
+                    }
+                    else if (i == 2)
+                    {
+                        animal.Name = updates[2];
+                    }
+                    else if (i == 3)
+                    {
+                        animal.Age = Convert.ToInt32(updates[3]);
+                    }
+                    else if (i == 4)
+                    {
+                        animal.Demeanor = updates[4];
+                    }
+                    else if (i == 5)
+                    {
+                        animal.KidFriendly = Convert.ToBoolean(updates[5]);
+                    }
+                    else if (i == 6)
+                    {
+                        animal.PetFriendly = Convert.ToBoolean(updates[6]);
+                    }
+                    else if (i == 7)
+                    {
+                        animal.Weight = Convert.ToInt32(updates[7]);
+                    }
+
+                }
+            }
+        
+        }
+
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
@@ -301,18 +357,41 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            //all adoptions that have approval or payment not collected 
-            throw new NotImplementedException();
+            var adoptionsFromDb = db.Adoptions.Where(a => a.ApprovalStatus == "Pending").Select(a => a);
+            return adoptionsFromDb;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            if (isAdopted)
+            {
+                adoption.PaymentCollected = true;
+                adoption.ApprovalStatus = "Adopted";
+                db.Adoptions.InsertOnSubmit(adoption);
+                db.SubmitChanges();
+                Console.WriteLine("Congratulations! Dont eat your animal.");
+            }
+            else
+            {
+                Console.WriteLine("Adoption denied.... scrub.");
+                adoption.ApprovalStatus = "Denied";
+                RemoveAdoption(adoption.AnimalId, adoption.ClientId, adoption);
+            }
         }
-
-        internal static void RemoveAdoption(int animalId, int clientId)
+        internal static void RemoveAdoption(int animalId, int clientId, Adoption adoption)
         {
-            throw new NotImplementedException();
+            if (adoption.ApprovalStatus == "Adopted")
+            {
+                var AnimalToBeRemoved = db.Animals.Where(a => a.AnimalId == animalId).FirstOrDefault();
+                db.Adoptions.DeleteOnSubmit(adoption);
+                db.Animals.DeleteOnSubmit(AnimalToBeRemoved);
+                db.SubmitChanges();
+            }
+            else //adoption denied
+            {
+                db.Adoptions.DeleteOnSubmit(adoption);
+                db.SubmitChanges();
+            }
         }
 
         // TODO: Shots Stuff
