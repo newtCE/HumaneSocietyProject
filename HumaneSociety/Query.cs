@@ -169,10 +169,10 @@ namespace HumaneSociety
             switch (crudOperation)
             {
                 case "update":
-                    UpdateEmployee(employee.EmployeeId);
+                    UpdateEmployee(employee);
                     break;
                 case "read":
-                    GetEmployeeByID(employee.EmployeeId);
+                    GetEmployeeByID(employee);
                     break;
                 case "delete":
                     RemoveEmployee(employee);
@@ -189,58 +189,34 @@ namespace HumaneSociety
             db.Employees.InsertOnSubmit(employee);
             db.SubmitChanges();
         }
-        internal static Employee GetEmployeeByID(int id)
+        internal static Employee GetEmployeeByID(Employee employee)
         {
-            return db.Employees.Where(e => e.EmployeeId == id).FirstOrDefault();
+            return db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).FirstOrDefault();
         }
 
-        internal static void UpdateEmployee(int id,Dictionary<int, string> updates)
+        internal static void UpdateEmployee(Employee employee)
         {
-            Employee employee = new Employee();
-            for (int i = 0; i < updates.Count; i++)
-            {
-                if (updates[i] == null)
-                {
-                    //do nothing 
-                }
-                else
-                {
-                    if (i == 1)
-                    {
-                        employee.FirstName = updates[1];
-                    }
-                    else if (i == 2)
-                    {
-                        employee.LastName = updates[2];
-                    }
-                    else if (i == 3)
-                    {
-                        employee.UserName=(updates[3]);
-                    }
-                    else if (i == 4)
-                    {
-                        employee.Password = updates[4];
-                    }
-                    else if (i == 5)
-                    {
-                        employee.EmployeeNumber = Convert.ToInt32(updates[5]);
-                    }
-                    else if (i == 6)
-                    {
-                        employee.Email = (updates[6]);
-                    }
-                }
-            }
+            var EmployeeToBeUpdated = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
+
+            EmployeeToBeUpdated.EmployeeId = employee.EmployeeId;
+            EmployeeToBeUpdated.FirstName = employee.FirstName;
+            EmployeeToBeUpdated.LastName = employee.LastName;
+            EmployeeToBeUpdated.Email = employee.Email;
+
+            db.SubmitChanges();
         }
         internal static void RemoveEmployee(Employee employee)
         {
+            var employeeToBeDeleted = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).FirstOrDefault();
             db.Employees.DeleteOnSubmit(employee);
+            db.SubmitChanges();
         }
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
             db.Animals.InsertOnSubmit(animal);
-            db.SubmitChanges();           
+            db.SubmitChanges();   
+
         }
 
         internal static Animal GetAnimalByID(int id)
@@ -256,7 +232,7 @@ namespace HumaneSociety
             {
                 if(updates[i] == null)
                 {
-                    //do nothing 
+                    
                 } else
                 {
                     if(i == 1)
@@ -286,6 +262,8 @@ namespace HumaneSociety
                         animal.Weight = Convert.ToInt32(updates[7]);
                     }
 
+
+                    db.SubmitChanges();
                 }
             }
         }
@@ -414,7 +392,19 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+            DateTime d = new DateTime();
+           
+            var animalShot = db.AnimalShots.Where(s => s.Shot.Name == shotName).FirstOrDefault();
+
+            if(animalShot == null)
+            {
+
+            } else
+            {
+                animalShot.DateReceived = d.Date;
+                db.SubmitChanges();
+            }
+           
         }
     }
 }
